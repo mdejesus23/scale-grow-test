@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+div {
+  font-size: 1.6rem;
+}
+
+main {
+  max-width: 60%;
+  margin: 10rem auto;
+}
+
+/* Styling for table */
+table {
+  width: 100%; /* Adjust as needed */
+  border-collapse: collapse; /* This removes the space between cells */
+}
+
+/* Styling for table header cells */
+th {
+  background-color: #f2f2f2; /* Background color */
+  color: #333; /* Text color */
+  font-weight: bold; /* Bold font */
+  padding: 8px; /* Padding */
+  border: 1px solid #ddd; /* Border */
+}
+
+/* Styling for table data cells */
+td {
+  padding: 8px; /* Padding */
+  border: 1px solid #ddd; /* Border */
+}
+
+/* Styling for alternate table rows (optional) */
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternate row background color */
+}
+
+/* Button style */
+button {
+  background-color: #4caf50; /* Green background */
+  border: none; /* No border */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding */
+  text-align: center; /* Center text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Display as inline-block */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  margin: 0 1rem;
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #45a049; /* Darker green background on hover */
+}
+
+td:nth-child(3) {
+  width: 100px; /* Adjust width as needed */
+}
+
+th:nth-child(3) {
+  width: 300px; /* Adjust width as needed */
+}
+
+.form {
+  width: 100%;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.form-row {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 24rem 1fr;
+  gap: 2.4rem;
+  padding: 1.2rem 0;
+}
+
+.form-row:first-child {
+  padding-top: 0;
+}
+
+.form-row:last-child {
+  padding-bottom: 0;
+}
+
+.form-row:not(:last-child) {
+  border-bottom: 1px solid var(--color-grey-100);
+}
+
+.form-row label {
+  font-weight: 500;
+}
+
+.form-row-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+
+.button {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button.primary {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.button.secondary {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.error {
+  font-size: 1.4rem;
+  color: var(--color-red-700);
+}
