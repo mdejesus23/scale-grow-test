@@ -1,20 +1,15 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { createProduct, editProduct } from "../../services/apiProducts";
+import { createProduct } from "../../services/apiProducts";
 
-function CreateItemForm({ productToEdit = {} }) {
-  const { id: editId, ...editValues } = productToEdit;
-  const isEditSession = Boolean(editId);
-
+function CreateItemForm() {
   // query client instance.
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: !isEditSession ? createProduct : editProduct,
+    mutationFn: createProduct,
     onSuccess: () => {
-      !isEditSession
-        ? alert("New Product Created!")
-        : alert("Product Updated!");
+      alert("New Product Created!");
       queryClient.invalidateQueries({
         qieryKey: ["prods"],
       });
@@ -22,14 +17,11 @@ function CreateItemForm({ productToEdit = {} }) {
     onError: (err) => alert(err.message),
   });
 
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: isEditSession ? editValues : {},
-  });
+  const { register, handleSubmit, reset } = useForm();
 
   function onSubmit(data) {
     console.log(data);
-    const productDetails = { editId, data };
-    mutate(productDetails);
+    mutate(data);
 
     reset();
   }
@@ -48,7 +40,7 @@ function CreateItemForm({ productToEdit = {} }) {
 
       <div className="form-row form-row-buttons">
         <button type="submit" className="button primary">
-          {isEditSession ? "Edit Product" : "Create Product"}
+          Create
         </button>
       </div>
     </form>

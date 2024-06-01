@@ -4,7 +4,7 @@ import { useState } from "react";
 import CreateItemForm from "./CreateItemForm";
 
 function Table() {
-  const [showForm, setShowForm] = useState(false);
+  const [showFormId, setShowFormId] = useState(null);
 
   const { data: products } = useQuery({
     queryKey: ["prods"],
@@ -19,7 +19,7 @@ function Table() {
     // refetching the data through this function.
     onSuccess: () => {
       queryClient.invalidateQueries({
-        qieryKey: ["prods"],
+        queryKey: ["prods"],
       });
     },
     onError: (err) => alert(err.message),
@@ -28,32 +28,43 @@ function Table() {
   return (
     <>
       <table>
-        <tr>
-          <th>Product Name</th>
-          <th>Amount</th>
-          <th></th>
-        </tr>
-        {products &&
-          products.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.amount}</td>
-              <td>
-                <button onClick={() => setShowForm((show) => !show)}>
-                  Edit
-                </button>
-                <button onClick={() => mutate(item.id)}>Delete</button>
-              </td>
-
-              {showForm && (
-                <tr key={item.id}>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products &&
+            products.map((item) => (
+              <>
+                <tr>
+                  <td>{item.name}</td>
+                  <td>{item.amount}</td>
                   <td>
-                    <CreateItemForm />
+                    <button
+                      onClick={() =>
+                        setShowFormId((prevId) =>
+                          prevId === item.id ? null : item.id
+                        )
+                      }
+                    >
+                      Edit
+                    </button>
+                    <button onClick={() => mutate(item.id)}>Delete</button>
                   </td>
                 </tr>
-              )}
-            </tr>
-          ))}
+                {showFormId === item.id && (
+                  <tr>
+                    <td colSpan="3">
+                      <CreateItemForm productToEdit={item} />
+                    </td>
+                  </tr>
+                )}
+              </>
+            ))}
+        </tbody>
       </table>
     </>
   );

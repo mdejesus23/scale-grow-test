@@ -22,6 +22,7 @@ main {
 table {
   width: 100%; /* Adjust as needed */
   border-collapse: collapse; /* This removes the space between cells */
+  margin-bottom: 15rem;
 }
 
 /* Styling for table header cells */
