@@ -1,10 +1,27 @@
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { createProduct } from "../../services/apiProducts";
 
 function CreateItemForm() {
+  // query client instance.
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: createProduct,
+    onSuccess: () => {
+      alert("New Product Created!");
+      queryClient.invalidateQueries({
+        qieryKey: ["prods"],
+      });
+    },
+    onError: (err) => alert(err.message),
+  });
+
   const { register, handleSubmit, reset } = useForm();
 
   function onSubmit(data) {
     console.log(data);
+    mutate(data);
 
     reset();
   }
